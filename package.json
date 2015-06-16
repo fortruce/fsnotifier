@@ -1,0 +1,11 @@
+{
+  "name": "fsnotifier",
+  "version": "0.0.1",
+  "description": "fsnotifier emits events to track appends to log files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
