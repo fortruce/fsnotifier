@@ -33,11 +33,8 @@ Notifier.prototype._size = function() {
     var stat = fs.statSync(this._filename);
     if (stat)
       return stat.size;
+  } finally {
     this.emit('error', 'Failed to stat file.');
-    this._close = true;
-    return undefined;
-  } catch (e) {
-    this.emit('error', e);
     this._close = true;
     return undefined;
   }
@@ -55,9 +52,8 @@ Notifier.prototype._watch = function() {
     this._stable = 0;
   }
 
-  if (this._stable >= this._pollTimes) {
+  if (this._stable === this._pollTimes) {
     this._notify(curSize);
-    this._stable = 0;
   }
 
   setTimeout(this._watch.bind(this), this._interval);

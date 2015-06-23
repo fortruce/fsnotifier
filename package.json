@@ -1,6 +1,6 @@
 {
   "name": "fsnotifier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "fsnotifier emits events to track appends to log files.",
   "main": "index.js",
   "scripts": {
