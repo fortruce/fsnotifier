@@ -4,6 +4,9 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 function Notifier(filename, options) {
+  if (!(this instanceof Notifier))
+    return new Notifier(filename, options);
+
   EventEmitter.call(this);
   this._filename = filename;
   this._prevSize = fs.statSync(filename).size;
@@ -17,6 +20,8 @@ function Notifier(filename, options) {
 
   // ensure there is no notification for the file being stable before first change
   this._stable = this._pollTimes + 1;
+
+  this._watch();
 }
 
 util.inherits(Notifier, EventEmitter);
@@ -67,10 +72,4 @@ Notifier.prototype._watch = function() {
   setTimeout(this._watch.bind(this), this._interval);
 }
 
-module.exports = {
-  notify: function(filename) {
-            var notifier = new Notifier(filename);
-            notifier._watch(filename);
-            return notifier;
-          }
-};
+module.exports = Notifier;
