@@ -1,11 +1,24 @@
 {
   "name": "fsnotifier",
-  "version": "0.0.6",
-  "description": "fsnotifier emits events to track appends to log files.",
+  "version": "0.0.7",
+  "description": "fsnotifier emits events to track appends to files.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fortruce/fsnotifier.git"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "fortruce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fortruce/fsnotifier/issues"
+  },
+  "homepage": "https://github.com/fortruce/fsnotifier",
+  "keywords": [
+    "notify",
+    "track",
+    "append",
+    "growing",
+    "log",
+    "notifier"
+  ]
 }
