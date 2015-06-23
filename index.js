@@ -29,14 +29,17 @@ Notifier.prototype._notify = function(curSize) {
 }
 
 Notifier.prototype._size = function() {
+  var stat;
   try {
-    var stat = fs.statSync(this._filename);
+    stat = fs.statSync(this._filename);
     if (stat)
       return stat.size;
   } finally {
-    this.emit('error', 'Failed to stat file.');
-    this._close = true;
-    return undefined;
+    if (!stat) {
+      this.emit('error', 'Failed to stat file.');
+      this._close = true;
+      return undefined;
+    }
   }
 }
 
