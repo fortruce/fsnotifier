@@ -9,10 +9,14 @@ function Notifier(filename, options) {
   this._prevSize = fs.statSync(filename).size;
   this._stable = 0;
   this._close = false;
+  this._notifySize = this._prevSize;
 
   options = options || {};
   this._interval = options.interval || 500;
   this._pollTimes = options.pollTimes || 4;
+
+  // ensure there is no notification for the file being stable before first change
+  this._stable = this._pollTimes + 1;
 }
 
 util.inherits(Notifier, EventEmitter);
@@ -23,9 +27,10 @@ Notifier.prototype.close = function() {
 
 Notifier.prototype._notify = function(curSize) {
   this.emit('change', fs.createReadStream(this._filename, {
-    start: this._prevSize,
+    start: this._notifySize,
     end: curSize
   }));
+  this._notifySize = curSize;
 }
 
 Notifier.prototype._size = function() {
